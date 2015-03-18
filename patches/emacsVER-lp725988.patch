@@ -1,0 +1,11 @@
+--- a/src/frame.h
++++ b/src/frame.h
+@@ -1196,7 +1196,7 @@
+ #ifdef HAVE_WINDOW_SYSTEM
+ 
+ /* The class of this X application.  */
+-#define EMACS_CLASS "Emacs"
++#define EMACS_CLASS "Emacs24"
+ 
+ /* These are in xterm.c, w32term.c, etc.  */
+ 

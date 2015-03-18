@@ -1,0 +1,16 @@
+Description: Fix window splitting when split-window-keep-point is nil.
+Forwarded: not-needed
+Origin: http://debbugs.gnu.org/cgi/bugreport.cgi?bug=14829#56
+
+--- a/lisp/window.el
++++ b/lisp/window.el
+@@ -5449,6 +5449,9 @@
+   (let ((buffer (if (bufferp buffer-or-name)
+ 		    buffer-or-name
+ 		  (get-buffer buffer-or-name)))
++	;; Make sure that when we split windows the old window keeps
++	;; point, bug#14829.
++	(split-window-keep-point t)
+ 	;; Handle the old form of the first argument.
+ 	(inhibit-same-window (and action (not (listp action)))))
+     (unless (listp action) (setq action nil))

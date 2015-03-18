@@ -1,0 +1,23 @@
+Description: quit-window (bound to 'q' in many modes) will incorrectly
+ iconify the frame in some cases.  This upstream patch for 24.2 is
+ purported to fix the problem.
+Author: Barry Warsaw <barry@ubuntu.com>
+Bug: http://debbugs.gnu.org/cgi/bugreport.cgi?bug=12764
+Forwarded: not-needed
+
+--- a/lisp/window.el
++++ b/lisp/window.el
+@@ -3035,7 +3035,12 @@
+ 	 quad resize)
+     (cond
+      ((and (not prev-buffer)
+-	   (memq (nth 1 quit-restore) '(window frame))
++           (or (eq (nth 1 quit-restore) 'frame)
++	       (and (eq (nth 1 quit-restore) 'window)
++		    ;; If the window has been created on an existing
++		    ;; frame and winds up as the sole window on that
++		    ;; frame, do not delete it (Bug#12764).
++		    (not (eq window (frame-root-window window)))))
+ 	   (eq (nth 3 quit-restore) buffer)
+ 	   ;; Delete WINDOW if possible.
+ 	   (window--delete window nil kill))

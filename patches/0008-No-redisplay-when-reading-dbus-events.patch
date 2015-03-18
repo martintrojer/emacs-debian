@@ -1,0 +1,18 @@
+Description: Prevent bogus redisplays when reading dbus events,
+ leading to incorrect buffer scrolling afterward.
+Forwarded: not-needed
+Applied-Upstream: http://bzr.savannah.gnu.org/lh/emacs/trunk/revision/112741
+Origin: http://savannah.gnu.org/projects/emacs
+
+--- a/lisp/net/dbus.el
++++ b/lisp/net/dbus.el
+@@ -270,7 +270,8 @@
+     ;; default 25".  Events which are not from D-Bus must be restored.
+     (with-timeout ((if timeout (/ timeout 1000.0) 25))
+       (while (eq (gethash key dbus-return-values-table :ignore) :ignore)
+-	(let ((event (let (unread-command-events) (read-event nil nil 0.1))))
++	(let ((event (let ((inhibit-redisplay t) unread-command-events)
++		       (read-event nil nil 0.1))))
+ 	  (when (and event (not (ignore-errors (dbus-check-event event))))
+ 	    (setq unread-command-events
+ 		  (append unread-command-events (list event)))))))
