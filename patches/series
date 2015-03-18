@@ -10,3 +10,5 @@ emacsVER-lp725988.patch
 0009-upstream-bug-14829.patch
 0008-Emacs-should-no-longer-hang-at-startup-on-kFreeBSD.patch
 0009-Emacs-should-no-longer-hang-at-startup-on-kFreeBSD.patch
+0042-terminal-redispaly-fix.patch
+

@@ -1,3 +1,8 @@
+emacs24 (24.3+1-2ubuntu1mt) trusty; urgency=low
+  * Fix for broken term redraw
+
+ -- Martin Trojer <martin.trojer@gmail.com>  Wed, 18 Mar 2015 12:26:33 -0500
+
 emacs24 (24.3+1-2ubuntu1) trusty; urgency=medium
 
   * Merge from Debian, with remaining changes:
